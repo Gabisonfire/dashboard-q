@@ -1,6 +1,6 @@
 # dashboard-q
 
-Dashboard-q is a homelab dashboard with qBittorrent, PRTG and forecast.io integraiton.
+Dashboard-q is a homelab dashboard with qBittorrent, PRTG and forecast.io integration.
 
 Extract to your webserver and edit the "config.ini" file with the proper settings. You'll also need to put your own ips in home.php.
 
