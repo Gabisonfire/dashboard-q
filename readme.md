@@ -11,3 +11,8 @@ dashboard-q is built using:
 
 ## Todo
  * Add error handling to requests.php
+
+ 
+## Screenshot
+
+![Alt text](/screenshots/home.jpg?raw=true "Optional Title")
