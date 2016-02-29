@@ -249,9 +249,27 @@ ul.sidebar-menu li.active a i {
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
 }
-
-}
 /*main content*/
+
+.error {
+    vertical-align: middle;
+    font-weight: bold;
+    color: red;
+    font-size: 12px;
+    left: 200px;
+    top: 90%;
+    position: fixed;
+}
+
+.error-center {
+    vertical-align: middle;
+    font-weight: bold;
+    color: red;
+    font-size: 22px;
+    left: 49%;
+    top: 49%;
+    position: fixed;
+}
 
 #weather-canvas{
 	opacity: 0.7;
@@ -1011,9 +1029,8 @@ div[data-role="editor-toolbar"] {
   -webkit-box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.1);
-  
 }
-}
+
 .panel.panel-default.panel-heading {
   background: #97d3c5;   
 }

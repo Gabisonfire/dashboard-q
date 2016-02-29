@@ -86,7 +86,7 @@ class ForecastIO
                 $cache = new Buffer();
                 $content = $cache->data($request_url);
             } else {
-                $content = file_get_contents($request_url);
+                $content = @file_get_contents($request_url);
             }
 
         } else {

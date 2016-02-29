@@ -70,14 +70,19 @@
 					<div class="info-box blue-bg">
 						<h3>Downloading</h3>						
 						<?php
-						foreach($torrents as $torrent)
-						{
-							if($torrent['state'] == "downloading")
-							{
-								echo $torrent['name'] . "<br>";
-							}
-						}
-						?>
+                                                if($torrents == null){
+                                                    echo "There was a problem fetching torrents.";                                                    
+                                                }
+                                                else {
+                                                    foreach($torrents as $torrent)
+                                                    {
+    							if($torrent['state'] == "downloading")
+                                                            {
+    								echo $torrent['name'] . "<br>";
+                                                            }
+                                                    }
+                                                }
+                                                ?>
 					</div><!--/.info-box-->			
 				</div><!--/.col-->
 
@@ -85,13 +90,18 @@
 					<div class="info-box green-bg">	
 						<h3>Seeding</h3>
 						<?php
-						foreach($torrents as $torrent)
-						{
-							if($torrent['state'] == "uploading")
-							{
-								echo $torrent['name'] . "<br>";
-							}
-						}
+                                                if($torrents == null){
+                                                    echo "There was a problem fetching torrents.";                                                    
+                                                }
+                                                else {
+                                                    foreach($torrents as $torrent)
+                                                    {
+    							if($torrent['state'] == "uploading")
+                                                            {
+    								echo $torrent['name'] . "<br>";
+                                                            }
+                                                    }
+                                                }    
 						?>
 					</div><!--/.info-box-->			
 				</div><!--/.col-->
@@ -114,15 +124,20 @@
 					<div class="info-box all-bg">
 					<h3>All</h3>
 						<?php
-						foreach($torrents as $torrent)
-						{							
-							$ratio = $torrent['ratio'];
-							if(strlen($ratio) > 4) 
-							{
-								$ratio = substr($ratio, 0, 4);
-							}
-							echo $torrent['name'] . "<span style=\"color: orange; font-weight: bold;\"> | Ratio: " . $ratio . "</span><br>";							
-						}
+                                                if($torrents == null){
+                                                    echo "There was a problem fetching torrents.";                                                    
+                                                }
+                                                else {
+                                                    foreach($torrents as $torrent)
+                                                    {							
+                                                            $ratio = $torrent['ratio'];
+                                                            if(strlen($ratio) > 4) 
+                                                            {
+    								$ratio = substr($ratio, 0, 4);
+                                                            }
+                                                            echo $torrent['name'] . "<span style=\"color: orange; font-weight: bold;\"> | Ratio: " . $ratio . "</span><br>";							
+                                                    }
+                                                }
 						?>
 					<div>
 				</div>
