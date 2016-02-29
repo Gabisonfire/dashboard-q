@@ -9,10 +9,7 @@ dashboard-q is built using:
  * [tobias redmann's forecast.io php api](https://github.com/tobias-redmann/forecast.io-php-api)
  * [darkskyapp's Skycons](https://github.com/darkskyapp/skycons)
 
-## Todo
- * Add error handling to requests.php
 
- 
 ## Screenshot
 
 ![Alt text](/screenshots/home.png?raw=true "Optional Title")
