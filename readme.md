@@ -23,6 +23,11 @@ dashboard-q is built using:
 
 ![Not found](/screenshots/home.png?raw=true "Optional Title")
 
+## Changelog
+
+ * 03-03-16: Added Dowload and upload speeds to the dashboard.
+ * 03-01-16: Added error handling for requests(still needs some work).
+
 ## License
 Distributed under the MIT License.
 
