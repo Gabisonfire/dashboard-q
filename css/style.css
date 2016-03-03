@@ -251,6 +251,10 @@ ul.sidebar-menu li.active a i {
 }
 /*main content*/
 
+.speeds {
+    font-size: 16px;
+    color: orange;
+}
 .error {
     vertical-align: middle;
     font-weight: bold;

@@ -33,6 +33,7 @@
 	include 'requests.php';
 	$cfg = parse_ini_file("config.ini");
 	$torrents = getRequest("/query/torrents?filter=all&sort=name");
+        $global_info = getRequest("/query/transferInfo");
 	$weather = weather();
  ?>
   <!--main content start-->
@@ -68,7 +69,7 @@
             <div class="row">			
 				<div class="col-lg-6 col-md-3 col-sm-12 col-xs-12">
 					<div class="info-box blue-bg">
-						<h3>Downloading</h3>						
+                                            <h3>Downloading <span class="speeds"><?php echo round(intval($global_info['dl_info_speed'])/1000000, 2) . " mB/s"; ?></span></h3>	
 						<?php
                                                 if($torrents == null){
                                                     echo "There was a problem fetching torrents.";                                                    
@@ -88,7 +89,7 @@
 
 				<div class="col-lg-6 col-md-3 col-sm-12 col-xs-12">
 					<div class="info-box green-bg">	
-						<h3>Seeding</h3>
+						<h3>Seeding <span class="speeds"><?php echo round(intval($global_info['up_info_speed'])/1000000, 2) . " mB/s"; ?></span></h3>
 						<?php
                                                 if($torrents == null){
                                                     echo "There was a problem fetching torrents.";                                                    
