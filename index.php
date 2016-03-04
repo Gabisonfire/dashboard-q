@@ -44,6 +44,9 @@
 
             <!--logo start-->
             <a href="index.php" class="logo">gab<span class="lite">network</span></a>
+            <div class="clock">
+            <span class="time-or"><?php echo date("h:")?><span class="time-blu"><?php echo date("i")?></span></span>
+            </div>
             <!--logo end-->         
             </div>
 			

@@ -255,6 +255,30 @@ ul.sidebar-menu li.active a i {
     font-size: 16px;
     color: orange;
 }
+
+.clock {
+    position: fixed;
+    top: 0;
+    right: 19px;
+    width: 50%;
+    height: 60px; 
+}
+
+.time-blu {
+    line-height: 60px;
+    color: #00a0df;
+    float: right;
+    font-size: 22px;
+    
+}
+
+.time-or {
+    line-height: 60px;
+    color: #fed189;
+    float: right;
+    font-size: 22px;
+}
+
 .error {
     vertical-align: middle;
     font-weight: bold;

@@ -5,13 +5,15 @@ Dashboard-q is a homelab dashboard with qBittorrent, PRTG and forecast.io integr
 Extract to your webserver and create/edit the "config.ini" file with the proper settings in the same directory as "requests.php". You'll also need to put your own ips in "home.php".
 Your config file should look like this: 
 
-    username = "myuser"
-    password = "mypass"
-    qbittorrent_url = "https://192.168.0.0:8080"
-    prtg_map = "https://prtg-server/public/mapshow.htm?id=1234&mapid=123456789123456789"
-    forecast_key = "myapikey"
-    forecast_lat = "12"
-    forecast_long = "-12"
+	torrent_username = "myuser"
+	torrent_password = "mypass"	
+	torrent_url = "https://192.168.0.0:8080"
+	prtg_map = "https://prtg-server/public/mapshow.htm?id=1234&mapid=123456789123456789"
+	forecast_key = "myapikey"
+	forecast_lat = "12"
+	forecast_long = "-12"
+	show_errors = true
+	show_weather = false
 
 dashboard-q is built using:
  * [Nice admin template](http://bootstraptaste.com/nice-admin-bootstrap-admin-html-template/?download=true)
@@ -25,9 +27,17 @@ dashboard-q is built using:
 
 ## Changelog
 
+ * 04-03-16: Added:
+   * Time display to top bar
+   * Better error display and messages
+   * Ability to hide errors
+   * Ability to disable weather
+   * Changed some config terms (had to be done) for future uses.
  * 03-03-16: Added Dowload and upload speeds to the dashboard.
  * 03-01-16: Added error handling for requests(still needs some work).
 
+## To-do
+ 
 ## License
 Distributed under the MIT License.
 

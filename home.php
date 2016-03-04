@@ -31,10 +31,15 @@
  <?php
 	// Process requests
 	include 'requests.php';
-	$cfg = parse_ini_file("config.ini");
+	$cfg = parse_ini_file("config.ini");        
 	$torrents = getRequest("/query/torrents?filter=all&sort=name");
         $global_info = getRequest("/query/transferInfo");
-	$weather = weather();
+        $show_errors = $cfg['show_errors'];
+        if( $cfg['show_weather'])
+        {
+            $weather = weather();
+        }
+                
  ?>
   <!--main content start-->
       <section id="main-content">
@@ -45,6 +50,7 @@
 					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
 					</div>
 					<div class="col-1">
+                                            <?php if($cfg['show_weather']){ ?>
 						<canvas id="weather-canvas" width="64" height="64"></canvas>
 						<script src="js/skycons.js"></script>
 						<script>						
@@ -52,9 +58,12 @@
 						icons.set("weather-canvas", "<?php echo $weather[1];?>");
 						icons.play();
 						</script>						
+                                            <?php } ?>
 					</div>
-					<div class="col-5">					
+					<div class="col-5">
+                                        <?php if($cfg['show_weather']){ ?>
 					<h3 class="page-header"><?php echo "<b>" . round($weather[2]) . "</b>, " . $weather[0] . ",  Feels like <b>" . round($weather[3]) . "</b>";?></h3>		
+                                        <?php } ?>
 					</div>
 			  </div>
 			  <div class="row">				
@@ -112,11 +121,10 @@
 			<div class="row">
 				<div class="col-lg-12 col-md-3 col-sm-12 col-xs-12">
 					<div class="info-box-prtg white-bg">
-					<?php
-					global $cfg;
+					<?php					
 					echo "<iframe width=100% height=100% frameborder=\"0\" src=\"" . $cfg['prtg_map'] .  "\"></iframe>";
 					?>
-					<div>
+					</div>
 				</div>
 			</div>
 			
@@ -140,9 +148,25 @@
                                                     }
                                                 }
 						?>
-					<div>
+					</div>
 				</div>
-			</div>
+			</div>                        
+                        <?php
+                        // Error display
+                        if($show_errors)
+                        { 
+                            echo "<div class=\"row\">";
+                            echo "<div class=\"col-lg-12 col-md-3 col-sm-12 col-xs-12\">";
+                            echo "<div class=\"info-box red-bg\">";
+                            echo "<h3><span style=\"color: black; font-weight: bold;\">Errors</span></h3>";
+                            foreach($errors as $err){
+                                echo "<span style=\"color: black; font-weight: bold;\">" . $err . "</span><br>";
+                            }
+                            echo "</div>";
+                            echo "</div>";
+                        }
+                        ?>
+ 
 			
            </div>  
             

@@ -1,5 +1,6 @@
 <?php	
 	include 'forecast.io.php';
+        $errors = [];
         
         // Check for config file
         if(!file_exists("config.ini"))
@@ -15,8 +16,8 @@
   {    
     global $cfg;
     $ch = curl_init();
-    $creds = 'username=' . urlencode($cfg['username']) . '&password=' . urlencode($cfg['password']);
-    $url = $cfg['qbittorrent_url'] . "/login";
+    $creds = 'username=' . urlencode($cfg['torrent_username']) . '&password=' . urlencode($cfg['torrent_password']);
+    $url = $cfg['torrent_url'] . "/login";
     curl_setopt($ch,CURLOPT_URL,$url);
     curl_setopt($ch,CURLOPT_POST, 1);         
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
@@ -30,7 +31,7 @@
     $response = curl_exec($ch);  
     $buffer = explode("\n", $response);
     if(count($buffer) < 4)
-    {
+    {     
         return array($response, null);
     }
     $start = strpos($buffer[4], "SID=");
@@ -39,22 +40,23 @@
     return array($sid, $ch);
     }
     catch (Exception $e)
-    {        
+    {               
         return array($e->getMessage(), null);
     }
   }
   
-  // Make get request to qBittorrent API
+  // Make get request to torrent API
   function getRequest($query)
   {
     global $cfg;
-    $url = $cfg['qbittorrent_url'] . $query;
+    global $errors;
+    $url = $cfg['torrent_url'] . $query;
     $content = authenticate();
     
     // if $ch is null, there was an error authenticating. Return that error.
     if($content[1] == null)
     {
-        echo "<span class=\"error\">There was a problem authenticating to qBittorrent. Check your settings and server status, make sure your ip is not banned.</span>";
+        array_push($errors, "Error authenticating to torrent client. " . $content[0]);
         return null;
     }
     $sid = $content[0];
@@ -75,7 +77,8 @@
         return $response;
     }
     catch (Exception $e)
-    {        
+    {     
+        array_push($errors, "Error contacting api. " . error_get_last()['message']);
         return array(null);
     }
   }
@@ -84,6 +87,7 @@
   function weather()
   {
     global $cfg;
+    global $errors;
     $api_key = $cfg['forecast_key'];
     $latitude = $cfg['forecast_lat'];
     $longitude = $cfg['forecast_long'];
@@ -95,7 +99,7 @@
     {
         return array($condition->getSummary(), $condition->getIcon(), $condition->getTemperature(), $condition->getApparentTemperature());
     }
-    echo "<span class=\"error\">There was an error fetching weather.</span>";
+    array_push($errors, "Error fetching weather. " . error_get_last()['message']);
     return array("Error fecthing weather", "rain", "0", "0");
   }
 ?>
