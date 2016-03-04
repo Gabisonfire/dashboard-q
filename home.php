@@ -29,7 +29,7 @@
   </head>
  <body>
  <?php
-	// MAke request to get all torrents
+	// Process requests
 	include 'requests.php';
 	$cfg = parse_ini_file("config.ini");
 	$torrents = getRequest("/query/torrents?filter=all&sort=name");
