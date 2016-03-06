@@ -2,10 +2,13 @@
 	include 'forecast.io.php';
         $errors = [];
         
-        // Check for config file
+        // Check for needed files
         if(!file_exists("config.ini"))
         {
             echo "<span class=\"error-center\">Failed to load config.ini</span>";
+            Exit(1);
+        }
+        if(!file_exists("bookmarks.dat")){
             Exit(1);
         }
         

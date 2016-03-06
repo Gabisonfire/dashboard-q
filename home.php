@@ -153,7 +153,7 @@
 			</div>                        
                         <?php
                         // Error display
-                        if($show_errors)
+                        if($show_errors && count($errors) > 0)
                         { 
                             echo "<div class=\"row\">";
                             echo "<div class=\"col-lg-12 col-md-3 col-sm-12 col-xs-12\">";

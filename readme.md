@@ -2,7 +2,9 @@
 
 Dashboard-q is a homelab dashboard with qBittorrent, PRTG and forecast.io integration.
 
-Extract to your webserver and create/edit the "config.ini" file with the proper settings in the same directory as "requests.php". You'll also need to put your own ips in "home.php".
+## Installation
+
+Extract to your webserver and create a "config.ini" file with the proper settings in the same directory as "requests.php" and a "bookmarks.dat" in the same directory as "index.php".
 Your config file should look like this: 
 
 	torrent_username = "myuser"
@@ -15,6 +17,29 @@ Your config file should look like this:
 	show_errors = true
 	show_weather = false
 
+The time is based on your php settings. Set the timezone in your php.ini file.
+
+## Bookmarks
+
+Bookmarks must be set in the "bookmarks.dat" file. Here's an example:
+
+    [qBittorrent]
+	url=https://192.168.0.0:8080
+	icon=icon_cloud-download_alt
+	iframe=true
+	
+	[Plex]
+	url=https://192.168.0.0:32400/web/index.html
+	icon=arrow_triangle-right_alt2
+	iframe=false
+	
+**Leave a blank line between each definition.**
+	
+ * url: The url you wish to reach
+ * icon: The icon of the bookmark, available icons are displayed here: https://www.elegantthemes.com/blog/resources/elegant-icon-font, Look under "Complete List Of Class Names".
+ * target: Can be true or false. "True" will open the page in the current window while "false" will open it in a new tab. You may encounter problem with "true" as some softwares won't allow loading in an iframe. Sometimes, you just need to visit the page once to accept the self-signed certificate.
+	
+	
 dashboard-q is built using:
  * [Nice admin template](http://bootstraptaste.com/nice-admin-bootstrap-admin-html-template/?download=true)
  * [tobias redmann's forecast.io php api](https://github.com/tobias-redmann/forecast.io-php-api)
@@ -35,8 +60,6 @@ dashboard-q is built using:
    * Changed some config terms (had to be done) for future uses.
  * 03-03-16: Added Dowload and upload speeds to the dashboard.
  * 03-01-16: Added error handling for requests(still needs some work).
-
-## To-do
  
 ## License
 Distributed under the MIT License.

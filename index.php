@@ -53,56 +53,102 @@
 
       </header>      
       <!--header end-->
+      
+ <?php
+        if(!file_exists("bookmarks.dat")){
+            echo "<span class=\"error-center\">Failed to load bookmarks.dat</span>";
+            Exit(1);
+        }
+        
+        $bookmarks = array_map('trim', file("bookmarks.dat"));
+        
+        class Bookmark {
+            var $name;
+            var $url;
+            var $icon;
+            var $iframe;                    
+        }
+        
+        // Parse bookmarks file
+        function spawnBookmarks()
+        {
+            $bookmark_array = [];
+            global $bookmarks;
+            for($i = 0; $i < count($bookmarks); $i++)
+            {
+                $bm = $bookmarks[$i];
+                if(startsWith($bm, "[") && endsWith($bm, "]"))
+                {
+                    $new = new Bookmark();
+                    $name = substr($bm, 1, strlen($bm)-2);
+                    $new->name = trim($name);
+                    do{
+                        $i++;
+                        if($i >= count($bookmarks)) {break;}
+                        if(startsWith($bookmarks[$i], "url="))
+                        {
+                            $new->url = substr($bookmarks[$i], 4, strlen($bookmarks[$i]) - 4);
+                        }
+                        if(startsWith($bookmarks[$i], "icon="))
+                        {
+                            $new->icon = substr($bookmarks[$i], 5, strlen($bookmarks[$i]) - 5);
+                        }
+                        if(startsWith($bookmarks[$i], "iframe="))
+                        {
+                            $new->iframe = substr($bookmarks[$i], 7, strlen($bookmarks[$i]) - 7);
+                            if($new->iframe === "true") {$new->iframe = true;} else $new->iframe = false;
+                        }
+                    } while (trim($bookmarks[$i]) !== "");
+                    array_push($bookmark_array, $new);
+                }
+            }
+            return $bookmark_array;
+        }
+      
+        // Simple functions to check strings
+        function startsWith($haystack, $needle)
+        {
+            $length = strlen($needle);
+            return (substr($haystack, 0, $length) === $needle);
+        }
 
+        function endsWith($haystack, $needle)
+        {
+            $length = strlen($needle);
+            if ($length == 0) {
+                return true;
+            }
+
+            return (substr($haystack, -$length) === $needle);
+        }      
+      ?>
+      
       <!--sidebar start-->
       <aside>
           <div id="sidebar"  class="nav-collapse ">		  
               <!-- sidebar menu start-->
-              <ul class="sidebar-menu">                
-                  <li class="active">
+              <ul class="sidebar-menu">
+                  <li class="active">                      
                       <a class="" href="home.php" target="search_iframe">
                           <i class="icon_desktop"></i>
                           <span>Dashboard</span>
                       </a>
-                  </li>
-				  <li class="">
-                      <a href="https://192.168.0.0:32400/web/index.html" target="search_iframe">
-                          <i class="arrow_triangle-right_alt2"></i>
-                          <span>Plex</span>
-                      </a>
-                  </li>       
-				  <li class="">
-                      <a href="https://192.168.0.0/home/" target="search_iframe">
-                          <i class="icon_calendar"></i>
-                          <span>Sickrage</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="https://192.168.0.0:8080" target="search_iframe">
-                          <i class="icon_cloud-download_alt"></i>
-                          <span>qBittorrent</span>
-                      </a>
-                  </li>
-				  <li class="">
-                      <a href="https://192.168.0.0:5050" target="search_iframe">
-                          <i class="icon_film"></i>
-                          <span>CouchPotato</span>
-                      </a>
-                  </li>
-                             
-				  <li class="">
-                      <a href="https://192.168.0.0/public/login.htm?loginurl=%2Fpublic%2F&errormsg=" target="_blank">
-                          <i class="icon_loading"></i>
-                          <span>PRTG</span>
-                      </a>
-                  </li>
-                  
-				  <li class="">
-                      <a href="https://192.168.0.0" target="_blank">
-                          <i class="icon_flowchart"></i>
-                          <span>Proxmox</span>
-                      </a>
-                  </li>
+                  </li>                                    
+                  <?php
+                  $bms = spawnBookmarks();
+                  foreach($bms as $bm)
+                  {
+                      echo "<li class=\"\">";                      
+                      if($bm->iframe)
+                        echo "<a href=\"" . $bm->url . "\" target=\"search_iframe\">";
+                      else
+                        echo "<a href=\"" . $bm->url . "\" target=\"_blank\">";
+                        echo "<i class=\"". $bm->icon ."\"></i>";
+                        echo "<span>". $bm->name ."</span>";
+                        echo "</a>";
+                        echo "</li>";
+                  }                                                      
+                  ?>		
                   
               </ul>
               <!-- sidebar menu end-->
