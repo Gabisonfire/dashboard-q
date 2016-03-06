@@ -52,6 +52,7 @@ dashboard-q is built using:
 
 ## Changelog
 
+ * 04-05-16: Moved bookmarks to a seperate file to ease updates.
  * 04-03-16: Added:
    * Time display to top bar
    * Better error display and messages
