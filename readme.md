@@ -16,6 +16,7 @@ Your config file should look like this:
 	forecast_long = "-12"
 	show_errors = true
 	show_weather = false
+	refresh_seconds = 300
 
 The time is based on your php settings. Set the timezone in your php.ini file.
 
@@ -52,6 +53,9 @@ dashboard-q is built using:
 
 ## Changelog
 
+ * 03-06-16: Added:
+   * Parameters in the config.ini are checked.
+   * You can now change the refresh delay of the page fomr the config file.
  * 03-05-16: Moved bookmarks to a seperate file to ease updates.
  * 03-03-16: Added:
    * Time display to top bar

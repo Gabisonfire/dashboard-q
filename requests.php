@@ -2,18 +2,60 @@
 	include 'forecast.io.php';
         $errors = [];
         
-        // Check for needed files
-        if(!file_exists("config.ini"))
-        {
-            echo "<span class=\"error-center\">Failed to load config.ini</span>";
-            Exit(1);
-        }
+        // Check for needed files        
         if(!file_exists("bookmarks.dat")){
             Exit(1);
         }
         
-	$cfg = parse_ini_file("config.ini");
+	$cfg = checkConfig();
 
+        
+   function checkConfig()
+   {
+       if(!file_exists("config.ini"))
+        {
+            echo "<span class=\"error-center\">Failed to load config.ini</span>";
+            Exit(1);
+        }
+        
+        try{
+            $config = file("config.ini");
+            $cfg = parse_ini_file("config.ini");
+        }
+        catch (Exception $e)
+        {
+            echo "<span class=\"error-center\">Error parsing config.ini. " . $e->getMessage() . "</span>";
+            Exit(1);
+        }
+        
+        foreach($config as $line)
+        {
+            $index = strpos($line, " =");
+            if($index === FALSE){continue;}
+            $param = substr($line, 0, $index);
+            switch($param){
+                case "torrent_username": break;                                        
+                case "torrent_password": break;
+                case "torrent_url": break;
+                case "prtg_map": break;
+                case "forecast_key": break;
+                case "forecast_lat": break;
+                case "forecast_long": break;
+                case "show_errors": break;
+                case "show_weather": break;
+                case "refresh_seconds": break;
+                default: 
+                {
+                    echo "<span class=\"error-center\">Invalid parameter in config.ini. (" . $line . ")</span>";
+                    Exit(1);
+                }
+            }
+        }
+        
+        return $cfg;
+   }
+        
+        
    // Get SID from qBittorrent API
   function authenticate()
   {    

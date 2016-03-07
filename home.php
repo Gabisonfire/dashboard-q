@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="refresh" content="300">
 
     <title>Main</title>
 
@@ -20,27 +19,23 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
 	<link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-      <script src="js/lte-ie7.js"></script>
-    <![endif]-->
   </head>
  <body>
  <?php
+        
 	// Process requests
 	include 'requests.php';
-	$cfg = parse_ini_file("config.ini");        
+	//$cfg is loaded from requests.php      
 	$torrents = getRequest("/query/torrents?filter=all&sort=name");
         $global_info = getRequest("/query/transferInfo");
         $show_errors = $cfg['show_errors'];
         if( $cfg['show_weather'])
         {
             $weather = weather();
-        }
-                
+        }    
+        header('Refresh: ' . $cfg['refresh_seconds']);
  ?>
+     
   <!--main content start-->
       <section id="main-content">
           <section class="wrapper-frame">            
