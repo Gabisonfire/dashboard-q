@@ -26,8 +26,8 @@
 	// Process requests
 	include 'requests.php';
 	//$cfg is loaded from requests.php      
-	$torrents = getRequest("/query/torrents?filter=all&sort=name");
-        $global_info = getRequest("/query/transferInfo");
+	//$torrents = getRequest("/query/torrents?filter=all&sort=name");
+        //$global_info = getRequest("/query/transferInfo");
         $show_errors = $cfg['show_errors'];
         if( $cfg['show_weather'])
         {
