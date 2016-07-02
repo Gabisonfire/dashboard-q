@@ -42,7 +42,7 @@
     }
 
     #sidebar > ul > li {
-        margin: 0 10px 5px 10px;
+        /*margin: 0 10px 5px 10px;*/
     }
     #sidebar > ul > li > a {
         height:35px;
