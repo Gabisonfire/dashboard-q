@@ -1,32 +1,42 @@
-function initializeJS() {
+ function initializeJS() {
 
+    //Speed at which to toggle the menu in milliseconds
+    var menuSpeed = 1000;
+
+    //sidebar menu toggle function
     function toggleSideBar(toggleSpeed){
+	var wSize = jQuery(window).width();
+	//menu close
+	if (wSize <= 768) {
+	    toggleSpeed = 0;
+	};
         if (jQuery('#sidebar > ul').is(":visible") === true && jQuery('#theframe').hasClass("sidebar-closed") === false) {
-            jQuery('#theframe').css({
-                'width': '100%'
-            });
-            jQuery('#theframe').animate({
-                'margin-left': '0px'
+	    jQuery('#theframe').animate({
+                'width': '100%',
+		'margin-left': '0px'
             }, toggleSpeed);
+
             jQuery('#sidebar').animate({
                 'margin-left': '-180px'
-            }, toggleSpeed);
+            }, toggleSpeed, function() {
+		jQuery('#sidebar > ul').hide();
+	    });
 
-            jQuery('#sidebar > ul').hide();
             jQuery("#container").addClass("sidebar-closed");
             jQuery('#theframe').addClass("sidebar-closed");
-        } else if (jQuery('#sidebar > ul').is(":visible") === false && jQuery('#theframe').hasClass("sidebar-closed") === true) {
-            jQuery('#theframe').animate({
-                'margin-left': '180px'
-            }, toggleSpeed);
 
+	//menu open
+        } else if (jQuery('#sidebar > ul').is(":visible") === false && jQuery('#theframe').hasClass("sidebar-closed") === true) {
+	    if (wSize > 768) {
+            jQuery('#theframe').animate({
+                'margin-left': '180px',
+                'width': '100%',
+                'width': '-=180px'
+            }, toggleSpeed);
+	    }
             jQuery('#sidebar').animate({
                 'margin-left': '0'
-            }, toggleSpeed, function(){
-                jQuery('#theframe').css({
-                    'width': 'calc(100% - 180px)'
-                });
-            });
+            }, toggleSpeed);
 
             jQuery('#sidebar > ul').show();
             jQuery("#container").removeClass("sidebar-closed");
@@ -74,34 +84,44 @@ function initializeJS() {
     jQuery(function() {
         function responsiveView() {
             var wSize = jQuery(window).width();
+	    //menu closed
             if (wSize <= 768) {
-		/*
-                jQuery('#container').addClass('sidebar-close');
+                jQuery('#container').addClass('sidebar-closed');
 		jQuery('#theframe').addClass('sidebar-closed');
                 jQuery('#sidebar > ul').hide();
 		jQuery('#theframe').css({
-                    'width': 'calc(100% - 180px)'
+                    //'width': 'calc(100% - 180px)'
+                    'width': '100%',
+                    'margin-left': '0px'
 		});
-		jQuery('#main-content').css({
-		    'width': 'calc(100% - 180px)'
-		});
-		*/
+                jQuery('#sidebar').css({
+                    'margin-left': '-180px'
+                });
+		//jQuery('#main-content').css({
+		//    'width': 'calc(100% - 180px)'
+		//});
+
 		//toggleSideBar();
             }
 
+	    //menu opened
             if (wSize > 768) {
-		/*
-                jQuery('#container').removeClass('sidebar-close');
-                jQuery('#theframe').removeClass('sidebar-close');
+
+                jQuery('#container').removeClass('sidebar-closed');
+                jQuery('#theframe').removeClass('sidebar-closed');
                 jQuery('#sidebar > ul').show();
 		jQuery('#theframe').css({
-                    'width': '100%'
+                    'margin-left': '180px',
+                    'width': 'calc(100% - 180px)'
                 });
-                jQuery('#main-content').css({
-                    'width': '100%'
-                });
-		*/
-		toggleSideBar(0);
+		jQuery('#sidebar').css({
+		    'margin-left': '0px'
+		});
+                //jQuery('#main-content').css({
+                //    'width': '100%'
+                //});
+
+		//toggleSideBar(0);
             }
         }
         jQuery(window).on('load', responsiveView);
@@ -109,43 +129,9 @@ function initializeJS() {
     });
 
     jQuery('.toggle-nav').click(function () {
-        toggleSideBar(500);
+        toggleSideBar(menuSpeed);
     });
-/*
-var toggleSideBar(function (){
-    if (jQuery('#sidebar > ul').is(":visible") === true && jQuery('#theframe').hasClass("sidebar-closed") === false) {
-        jQuery('#theframe').css({
-            'width': '100%'
-        });
-        jQuery('#theframe').animate({
-            'margin-left': '0px'
-        }, 500);
-        jQuery('#sidebar').animate({
-            'margin-left': '-180px'
-        }, 500);
 
-        jQuery('#sidebar > ul').hide();
-        jQuery("#container").addClass("sidebar-closed");
-        jQuery('#theframe').addClass("sidebar-closed");
-    } else if (jQuery('#sidebar > ul').is(":visible") === false && jQuery('#theframe').hasClass("sidebar-closed") === true) {
-        jQuery('#theframe').animate({
-            'margin-left': '180px'
-        }, 500);
-
-        jQuery('#sidebar').animate({
-            'margin-left': '0'
-        }, 500, function(){
-            jQuery('#theframe').css({
-                'width': 'calc(100% - 180px)'
-            });
-        });
-
-        jQuery('#sidebar > ul').show();
-        jQuery("#container").removeClass("sidebar-closed");
-        jQuery('#theframe').removeClass("sidebar-closed");
-    };
-});
-*/
     //bar chart
     if (jQuery(".custom-custom-bar-chart")) {
         jQuery(".bar").each(function () {
