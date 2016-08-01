@@ -7,16 +7,23 @@ Dashboard-q is a homelab dashboard with qBittorrent, PRTG and forecast.io integr
 Extract to your webserver and create a "config.ini" file with the proper settings in the same directory as "requests.php" and a "bookmarks.dat" in the same directory as "index.php".
 Your config file should look like this: 
 
+Example config
+
+	torrent_client = transmission
 	torrent_username = "myuser"
 	torrent_password = "mypass"	
-	torrent_url = "https://192.168.0.0:8080"
+	torrent_host = "192.168.0.0"
+	torrent_port = "8080"
 	prtg_map = "https://prtg-server/public/mapshow.htm?id=1234&mapid=123456789123456789"
 	forecast_key = "myapikey"
 	forecast_lat = "12"
 	forecast_long = "-12"
 	show_errors = true
-	show_weather = false
+	show_weather = true
+	show_prtg = true
 	refresh_seconds = 300
+
+Support only for transmission and qbittorrent
 
 The time is based on your php settings. Set the timezone in your php.ini file.
 
