@@ -43,7 +43,15 @@
             </div>
 
             <!--logo start-->
-            <a href="index.php" class="logo">gab<span class="lite">network</span></a>
+            <?php 
+            
+            // Edit page title below
+            $first_part = "MY";
+            $second_part = "NETWORK";
+            
+            echo '<a href=\"index.php\" class=\"logo\">' . $first_part . '<span class=\"lite\">' . $second_part . '</span></a>';
+            ?>
+            
             <div class="clock">
             <span class="time-or"><?php echo date("h:")?><span class="time-blu"><?php echo date("i")?></span></span>
             </div>
