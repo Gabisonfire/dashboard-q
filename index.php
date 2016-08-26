@@ -83,7 +83,7 @@
 ?>
             
             <div class="storage">        
-                        <i class="icon_drive"></i><a href="http://192.168.100.244/admin/" target="_blank">
+                        <i class="icon_drive"></i>
                         <?php echo "NAS Storage:  $du Used - $df Free - $dt Total"; ?>
                         </a>
                 </div>           
