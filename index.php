@@ -51,12 +51,48 @@
             
             echo '<a href=\"index.php\" class=\"logo\">' . $first_part . '<span class=\"lite\">' . $second_part . '</span></a>';
             ?>
+            <?php
+            include 'requests.php';
+            if ($cfg['free_storage']){
+                        include 'free_storage';
+            }
+            if ($cfg['total_storage']){
+                include 'total_storage';
+            }
+            $free_storage = ($cfg['free_storage']);
+            $total_storage = ($cfg['total_storage']);
+           
+            /* get disk space free (in bytes) */
+            $df = disk_free_space($free_storage);
+            /* and get disk space total (in bytes)  */
+            $dt = disk_total_space($total_storage);
+            /* now we calculate the disk space used (in bytes) */
+            $du = $dt - $df;
+            /* percentage of disk used - this will be used to also set the width % of the progress bar */
+            $dp = sprintf('%.2f',($du / $dt) * 100);
+            /* and we formate the size from bytes to MB, GB, etc. */
+            $df = formatSize($df);
+            $du = formatSize($du);
+            $dt = formatSize($dt);
+            function formatSize( $bytes )
+        {
+            $types = array( 'B', 'KB', 'MB', 'GB', 'TB' );
+            for( $i = 0; $bytes >= 1024 && $i < ( count( $types ) -1 ); $bytes /= 1024, $i++ );
+                   return( round( $bytes, 2 ) . " " . $types[$i] );
+}
+?>
             
+            <div class="storage">        
+                        <i class="icon_drive"></i><a href="http://192.168.100.244/admin/" target="_blank">
+                        <?php echo "NAS Storage:  $du Used - $df Free - $dt Total"; ?>
+                        </a>
+                </div>           
             <div class="clock">
             <span class="time-or"><?php echo date("h:")?><span class="time-blu"><?php echo date("i")?></span></span>
             </div>
             <!--logo end-->         
             </div>
+            
 			
 
       </header>      
