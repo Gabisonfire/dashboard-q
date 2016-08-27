@@ -7,18 +7,27 @@ Dashboard-q is a homelab dashboard with qBittorrent, PRTG and forecast.io integr
 Extract to your webserver and create a "config.ini" file with the proper settings in the same directory as "requests.php" and a "bookmarks.dat" in the same directory as "index.php".
 Your config file should look like this: 
 
+Example config
+
+	torrent_client = transmission
 	torrent_username = "myuser"
 	torrent_password = "mypass"	
-	torrent_url = "https://192.168.0.0:8080"
+	torrent_host = "192.168.0.0"
+	torrent_port = "8080"
 	prtg_map = "https://prtg-server/public/mapshow.htm?id=1234&mapid=123456789123456789"
 	forecast_key = "myapikey"
 	forecast_lat = "12"
 	forecast_long = "-12"
 	show_errors = true
-	show_weather = false
+	show_weather = true
+	show_prtg = true
 	refresh_seconds = 300
 
+Support only for transmission and qbittorrent
+
 The time is based on your php settings. Set the timezone in your php.ini file.
+
+Secure your webserver to deny-all on the config.ini, otherwise, anyone can view your api-key, torrent_username, and torrent_password simply by appending /config.ini to the end of the url.
 
 ## Bookmarks
 
@@ -38,8 +47,9 @@ Bookmarks must be set in the "bookmarks.dat" file. Here's an example:
 	
  * url: The url you wish to reach
  * icon: The icon of the bookmark, available icons are displayed here: https://www.elegantthemes.com/blog/resources/elegant-icon-font, Look under "Complete List Of Class Names".
- * target: Can be true or false. "True" will open the page in the current window while "false" will open it in a new tab. You may encounter problem with "true" as some softwares won't allow loading in an iframe. Sometimes, you just need to visit the page once to accept the self-signed certificate.
+ * iframe: Can be true or false. "True" will open the page in the current window while "false" will open it in a new tab. You may encounter problem with "true" as some softwares won't allow loading in an iframe. Sometimes, you just need to visit the page once to accept the self-signed certificate.
 	
+To change to the of the page title (where it says "GABNETWORK" in the screenshots), edit the index.php file and change the values of $first_part and $second_part. This will eventually be improved as this settings will be overwritten by a git pull everytime.
 	
 dashboard-q is built using:
  * [Nice admin template](http://bootstraptaste.com/nice-admin-bootstrap-admin-html-template/?download=true)
@@ -51,20 +61,6 @@ dashboard-q is built using:
 
 ![Not found](/screenshots/home.png?raw=true "Optional Title")
 
-## Changelog
-
- * 03-06-16: Added:
-   * Parameters in the config.ini are checked.
-   * You can now change the refresh delay of the page fomr the config file.
- * 03-05-16: Moved bookmarks to a seperate file to ease updates.
- * 03-03-16: Added:
-   * Time display to top bar
-   * Better error display and messages
-   * Ability to hide errors
-   * Ability to disable weather
-   * Changed some config terms (had to be done) for future uses.
- * 03-03-16: Added Dowload and upload speeds to the dashboard.
- * 03-01-16: Added error handling for requests(still needs some work).
  
 ## License
 Distributed under the MIT License.
