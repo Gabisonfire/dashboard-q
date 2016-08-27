@@ -38,6 +38,7 @@
                 $weather = weather();
             }
             header('Refresh: ' . $cfg['refresh_seconds']);
+            
         ?>
     
         <!--main content start-->

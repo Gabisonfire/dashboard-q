@@ -747,6 +747,9 @@ div[data-role="editor-toolbar"] {
 .breadcrumb > .active {
   color: #d4d4d4;
 }
+.storage{
+  text-align: center;
+}
 /* .info-box
 =================================================================== */
 .info-box {
