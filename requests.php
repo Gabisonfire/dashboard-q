@@ -45,8 +45,8 @@
                 case "show_weather": break;
                 case "show_prtg": break;
                 case "refresh_seconds": break;
-                case "total_storage": break;
-                case "free_storage": break;
+                case "storage_path": break;
+                case "storage_name": break;
                 default:
                 {
                     echo "<span class=\"error-center\">Invalid parameter in config.ini. (" . $line . ")</span>";

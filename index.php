@@ -45,46 +45,39 @@
             <!--logo start-->
             <?php 
             
-            // Edit page title below
+            /* Edit page title below */
             $first_part = "MY";
             $second_part = "NETWORK";
-            
-            echo '<a href=\"index.php\" class=\"logo\">' . $first_part . '<span class=\"lite\">' . $second_part . '</span></a>';
-            ?>
-            <?php
+            /*************************/
+			
+			echo '<a href=index.php class=logo>' . $first_part . '<span class=lite>' . $second_part . '</span></a>';								
             include 'requests.php';
-            if ($cfg['free_storage']){
-                        include 'free_storage';
-            }
-            if ($cfg['total_storage']){
-                include 'total_storage';
-            }
-            $free_storage = ($cfg['free_storage']);
-            $total_storage = ($cfg['total_storage']);
+            $storage_path = ($cfg['storage_path']);
+            $storage_name = ($cfg['storage_name']);
            
             /* get disk space free (in bytes) */
-            $df = disk_free_space($free_storage);
+            $df = disk_free_space($storage_path);
             /* and get disk space total (in bytes)  */
-            $dt = disk_total_space($total_storage);
+            $dt = disk_total_space($storage_path);
             /* now we calculate the disk space used (in bytes) */
             $du = $dt - $df;
             /* percentage of disk used - this will be used to also set the width % of the progress bar */
             $dp = sprintf('%.2f',($du / $dt) * 100);
-            /* and we formate the size from bytes to MB, GB, etc. */
+            /* and we format the size from bytes to MB, GB, etc. */
             $df = formatSize($df);
             $du = formatSize($du);
             $dt = formatSize($dt);
             function formatSize( $bytes )
-        {
+			{
             $types = array( 'B', 'KB', 'MB', 'GB', 'TB' );
             for( $i = 0; $bytes >= 1024 && $i < ( count( $types ) -1 ); $bytes /= 1024, $i++ );
                    return( round( $bytes, 2 ) . " " . $types[$i] );
 }
-?>
+			?>
             
             <div class="storage">        
                         <i class="icon_drive"></i>
-                        <?php echo "NAS Storage:  $du Used - $df Free - $dt Total"; ?>
+                        <?php echo "$storage_name:  $du Used - $df Free - $dt Total"; ?>
                         </a>
                 </div>           
             <div class="clock">
