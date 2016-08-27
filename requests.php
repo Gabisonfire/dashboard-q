@@ -47,6 +47,9 @@
                 case "refresh_seconds": break;
                 case "storage_path": break;
                 case "storage_name": break;
+				case "show_storage": break;
+				case "title_first_part": break;
+				case "title_second_part": break;
                 default:
                 {
                     echo "<span class=\"error-center\">Invalid parameter in config.ini. (" . $line . ")</span>";

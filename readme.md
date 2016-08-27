@@ -1,6 +1,6 @@
 # dashboard-q
 
-Dashboard-q is a homelab dashboard with qBittorrent, PRTG and forecast.io integration.
+Dashboard-q is a homelab dashboard with qBittorrent/Transmission, PRTG and forecast.io integration.
 
 ## Installation
 
@@ -21,7 +21,12 @@ Example config
 	show_errors = true
 	show_weather = true
 	show_prtg = true
+	show_storage = true
 	refresh_seconds = 300
+	storage_path = C:
+	storage_name = "Server C Drive"
+	title_first_part = "My Super Cool"
+	title_second_part = "Lab Dashboard"
 
 Support only for transmission and qbittorrent
 
@@ -48,8 +53,7 @@ Bookmarks must be set in the "bookmarks.dat" file. Here's an example:
  * url: The url you wish to reach
  * icon: The icon of the bookmark, available icons are displayed here: https://www.elegantthemes.com/blog/resources/elegant-icon-font, Look under "Complete List Of Class Names".
  * iframe: Can be true or false. "True" will open the page in the current window while "false" will open it in a new tab. You may encounter problem with "true" as some softwares won't allow loading in an iframe. Sometimes, you just need to visit the page once to accept the self-signed certificate.
-	
-To change to the of the page title (where it says "GABNETWORK" in the screenshots), edit the index.php file and change the values of $first_part and $second_part. This will eventually be improved as this settings will be overwritten by a git pull everytime.
+
 	
 dashboard-q is built using:
  * [Nice admin template](http://bootstraptaste.com/nice-admin-bootstrap-admin-html-template/?download=true)
