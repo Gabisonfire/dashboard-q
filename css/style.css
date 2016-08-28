@@ -50,6 +50,7 @@ table tr th { color: #688a7e;}
 }
 
 .lite{
+    
     color: #00a0df !important;
 }
 
@@ -748,6 +749,7 @@ div[data-role="editor-toolbar"] {
   color: #d4d4d4;
 }
 .storage{
+  padding-right: 450px;
   text-align: center;
 }
 /* .info-box

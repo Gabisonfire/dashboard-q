@@ -45,7 +45,7 @@
             <!--logo start-->
             <?php 
             include 'requests.php';
-			echo '<a href=index.php class=logo>' . $cfg['title_first_part'] . '<span class=lite>' . $cfg['title_second_part'] . '</span></a>';								
+			echo '<a href=index.php class=logo>' . $cfg['title_first_part'] . '<span class=lite>' . " " . $cfg['title_second_part'] . '</span></a>';								
             
 			if($cfg['show_storage']) {
 				include 'storage.php';
