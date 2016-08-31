@@ -4,33 +4,10 @@ Dashboard-q is a homelab dashboard with qBittorrent/Transmission, PRTG and forec
 
 ## Installation
 
-Extract to your webserver and create a "config.ini" file with the proper settings in the same directory as "requests.php" and a "bookmarks.dat" in the same directory as "index.php".
-Your config file should look like this: 
+Extract to your webserver and create a "bookmarks.dat" file in the root direcotry.
+Then, in your browser, navigate to the root of the directory (ex: http://localhost/dahboard-q) and you will be prompted with the settings page for your initial setup.
 
-Example config
-
-	torrent_client = transmission
-	torrent_username = "myuser"
-	torrent_password = "mypass"	
-	torrent_host = "192.168.0.0"
-	torrent_port = "8080"
-	prtg_map = "https://prtg-server/public/mapshow.htm?id=1234&mapid=123456789123456789"
-	forecast_key = "myapikey"
-	forecast_lat = "12"
-	forecast_long = "-12"
-	show_errors = true
-	show_weather = true
-	show_prtg = true
-	show_storage = true
-	refresh_seconds = 300
-	storage_path = C:
-	storage_name = "Server C Drive"
-	title_first_part = "My Super Cool"
-	title_second_part = "Lab Dashboard"
-
-Support only for transmission and qbittorrent
-
-The time is based on your php settings. Set the timezone in your php.ini file.
+The time display is based on your php settings. Set the timezone in your php.ini file.
 
 Secure your webserver to deny-all on the config.ini, otherwise, anyone can view your api-key, torrent_username, and torrent_password simply by appending /config.ini to the end of the url.
 
@@ -63,7 +40,7 @@ dashboard-q is built using:
 
 ## Screenshot
 
-![Not found](/screenshots/home.png?raw=true "Optional Title")
+![Not found](/screenshots/home.png?raw=true "Home")
 
  
 ## License

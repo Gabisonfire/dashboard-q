@@ -42,21 +42,28 @@
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
             </div>
 
+
+            <!-- Settings button-->
+            <div id="settings_icon">
+                <div class="icon-reorder tooltips" data-original-title="Settings" data-placement="bottom"><a href="settings.php" target="search_iframe"><i class="icon_adjust-vert"></i></a></div>
+            </div>
+
             <!--logo start-->
             <?php 
             include 'requests.php';
 			echo '<a href=index.php class=logo>' . $cfg['title_first_part'] . '<span class=lite>' . " " . $cfg['title_second_part'] . '</span></a>';								
             
-			if($cfg['show_storage']) {
+			if($cfg['show_storage'] == "true") {
 				include 'storage.php';
 			}			
             ?>
-			
-            <div class="clock">
-            <span class="time-or"><?php echo date("h:")?><span class="time-blu"><?php echo date("i")?></span></span>
-            </div>
-            <!--logo end-->         
-            </div>
+            <!--logo end-->
+
+          <div class="clock">
+              <span class="time-or"><?php echo date("h:")?><span class="time-blu"><?php echo date("i")?></span></span>
+          </div>
+
+          </div>
             
 			
 

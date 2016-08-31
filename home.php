@@ -34,7 +34,7 @@
             //Show Errors?
             $show_errors = $cfg['show_errors'];
             //Show Weather
-            if( $cfg['show_weather']){
+            if( $cfg['show_weather'] == "true"){
                 $weather = weather();
             }
             header('Refresh: ' . $cfg['refresh_seconds']);
@@ -53,7 +53,7 @@
                     </div>
                     <!--Weather Section-->
                     <div class="col-1">
-                        <?php if($cfg['show_weather']){ ?>
+                        <?php if($cfg['show_weather'] == "true"){ ?>
                             <canvas id="weather-canvas" width="64" height="64"></canvas>
                             <script src="js/skycons.js"></script>
                             <script>
@@ -64,7 +64,7 @@
                         <?php } ?>
                     </div>
                     <div class="col-5">
-                        <?php if($cfg['show_weather']){ ?>
+                        <?php if($cfg['show_weather'] == "true"){ ?>
                             <h3 class="page-header"><?php echo "<b>" . round($weather[2]) . "</b>, " . $weather[0] . ",  Feels like <b>" . round($weather[3]) . "</b>";?></h3>
                         <?php } ?>
                     </div>
@@ -86,7 +86,7 @@
                 ?>
                 <!--prtg section-->
                 <?php
-                    if ($cfg['show_prtg']){
+                    if ($cfg['show_prtg'] == "true"){
                         include 'prtg.php';
                     }
                 ?>
