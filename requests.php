@@ -2,6 +2,8 @@
 	include 'forecast.io.php';
     $errors = [];
 
+    $initialSetup = false;
+
     // Check for needed file
     if(!file_exists("bookmarks.dat")){
         Exit(1);
@@ -13,6 +15,7 @@
         if(!file_exists("config.ini"))
         {
             echo "<span class=\"error-center\">Failed to load config.ini</span>";
+            header("Location: settings.php");
             Exit(1);
         }
 
@@ -50,6 +53,7 @@
 				case "show_storage": break;
 				case "title_first_part": break;
 				case "title_second_part": break;
+                case "initial_setup": break;
                 default:
                 {
                     echo "<span class=\"error-center\">Invalid parameter in config.ini. (" . $line . ")</span>";
@@ -225,4 +229,3 @@
     array_push($errors, "Error fetching weather. " . error_get_last()['message']);
     return array("Error fecthing weather", "rain", "0", "0");
   }
-?>
