@@ -79,6 +79,5 @@ if($init)
 else {
     header("Location: home.php");
 }
-}
 
 // update readme and screenshots
