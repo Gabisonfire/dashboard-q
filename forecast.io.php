@@ -9,7 +9,8 @@ class ForecastIO
     private $api_key;
     private $units;
     private $language;
-    const API_ENDPOINT = 'https://api.forecast.io/forecast/';
+    //const API_ENDPOINT = 'https://api.forecast.io/forecast/';
+    const API_ENDPOINT = 'https://api.darksky.net/forecast/';
 
     /**
      * Create a new instance
