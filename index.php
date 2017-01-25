@@ -30,7 +30,7 @@
 
   <body>
   	  <div class="frame">
-		<iframe id="theframe" name="search_iframe" src="home.php" frameborder="0"></iframe>
+              <iframe id="theframe" name="search_iframe" src="home.php" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
 	  </div>
 
   <!-- container section start -->
