@@ -180,7 +180,7 @@
     $torrent_host = $cfg['torrent_host'];
     $torrent_port = $cfg['torrent_port'];
     $creds = $cfg['torrent_username'] . ":" . $cfg['torrent_password'];
-    $json = array("arguments" => array("fields" => array("name", "uploadRatio", "status")),"method" => "torrent-get") ;
+    $json = array("arguments" => array("fields" => array("name", "uploadRatio", "status", "peersGettingFromUs")),"method" => "torrent-get") ;
     $a = json_encode($json) ;
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_HEADER, 1);
