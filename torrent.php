@@ -56,7 +56,7 @@
                         }
                     } elseif ($client == "transmission"){
                         foreach($torrents['torrents'] as $torrent){
-                            if($torrent['status'] == "6"){
+                            if($torrent['status'] == "6" && $torrent['peersGettingFromUs'] != "0"){
                                 echo $torrent['name'] . "<br>";
                             }
                         }
