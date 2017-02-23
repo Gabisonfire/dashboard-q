@@ -11,6 +11,8 @@ The time display is based on your php settings. Set the timezone in your php.ini
 
 Secure your webserver to deny-all on the config.ini, otherwise, anyone can view your api-key, torrent_username, and torrent_password simply by appending /config.ini to the end of the url.
 
+Make sure your config.ini is writeable by your webserver otherwise the settings page won't work.
+
 ## Bookmarks
 
 Bookmarks must be set in the "bookmarks.dat" file. Here's an example:
