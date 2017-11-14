@@ -16,7 +16,6 @@
     <link href="css/elegant-icons-style.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />    
     <!-- Custom styles -->
-	<link href="css/widgets.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
 	<link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
@@ -43,10 +42,15 @@
             </div>
 
 
+          
             <!-- Settings button-->
             <div id="settings_icon">
                 <div class="icon-reorder tooltips" data-original-title="Settings" data-placement="bottom"><a href="settings.php" target="search_iframe"><i class="icon_adjust-vert"></i></a></div>
             </div>
+            
+            <div id="settings_icon">
+                <div class="icon-reorder tooltips" data-original-title="Bookmarks" data-placement="bottom"><a href="bookmarks.php" target="search_iframe"><i class="icon_tags_alt"></i></a></div>
+            </div>   
 
             <!--logo start-->
             <?php 
@@ -70,19 +74,18 @@
       </header>      
       <!--header end-->
       
- <?php
-        if(!file_exists("bookmarks.dat")){
-            echo "<span class=\"error-center\">Failed to load bookmarks.dat</span>";
-            Exit(1);
+ <?php    
+ 
+        if(file_exists("bookmarks.dat")){    
+            $bookmarks = array_map('trim', file("bookmarks.dat"));
         }
-        
-        $bookmarks = array_map('trim', file("bookmarks.dat"));
         
         class Bookmark {
             var $name;
             var $url;
             var $icon;
-            var $iframe;                    
+            var $iframe; 
+            var $isCategory;
         }
         
         // Parse bookmarks file
@@ -113,6 +116,11 @@
                         {
                             $new->iframe = substr($bookmarks[$i], 7, strlen($bookmarks[$i]) - 7);
                             if($new->iframe === "true") {$new->iframe = true;} else $new->iframe = false;
+                        }
+                        if(startsWith($bookmarks[$i], "isCategory="))
+                        {
+                            $new->isCategory = substr($bookmarks[$i], 11, strlen($bookmarks[$i]) - 11);
+                            if($new->isCategory === "true") {$new->isCategory = true;} else $new->isCategory = false;
                         }
                     } while (trim($bookmarks[$i]) !== "");
                     array_push($bookmark_array, $new);
@@ -149,21 +157,50 @@
                           <i class="icon_desktop"></i>
                           <span>Dashboard</span>
                       </a>
-                  </li>                                    
+                  </li>     
+                  
+
                   <?php
                   $bms = spawnBookmarks();
+                  $firstpass = true;
+                  echo "<ul class=\"accordion\">";
                   foreach($bms as $bm)
                   {
-                      echo "<li class=\"\">";                      
-                      if($bm->iframe)
-                        echo "<a href=\"" . $bm->url . "\" target=\"search_iframe\">";
-                      else
-                        echo "<a href=\"" . $bm->url . "\" target=\"_blank\">";
-                        echo "<i class=\"". $bm->icon ."\"></i>";
-                        echo "<span>". $bm->name ."</span>";
-                        echo "</a>";
-                        echo "</li>";
-                  }                                                      
+                      if ($bm->isCategory)
+                      {
+                         if($firstpass)
+                         {
+                             $firstpass = false;
+                         }  else {
+                            echo "</ul>";
+                            echo "</li>";
+                         }
+                         echo "<li>";
+                         echo "<a class=\"toggle\" href=\"javascript:void(0);\">";
+                         echo "<i class=\"". $bm->icon ."\"></i>";
+                         echo "<span>" . $bm->name ."</span>";
+                         echo "</a>";
+                         echo "<ul class=\"inner\">";
+                      }
+                      else {                        
+                        echo "<li>";                      
+                        if($bm->iframe)
+                        {
+                          echo "<a href=\"" . $bm->url . "\" target=\"search_iframe\">";
+                        }
+                        else
+                        {
+                          echo "<a href=\"" . $bm->url . "\" target=\"_blank\">";                        
+                        }
+                          echo "<i class=\"". $bm->icon ."\"></i>";
+                          echo "<span>". $bm->name ."</span>";
+                          echo "</a>";  
+                          echo "</li>";
+                      }
+                  }  
+                  echo "</ul>";
+                  echo "</li>";
+                  echo "</ul>";
                   ?>		
                   
               </ul>
@@ -186,7 +223,7 @@
   
     <!-- custom select -->
     <script src="js/jquery.customSelect.min.js" ></script>
-    <!--custome script for all page-->
+    <!--custom script for all page-->
     <script src="js/scripts.js"></script>
     <!-- custom script for this page-->
 	<script src="js/jquery-jvectormap-1.2.2.min.js"></script>
@@ -194,9 +231,22 @@
 	<script src="js/jquery.autosize.min.js"></script>
 	<script src="js/jquery.placeholder.min.js"></script>
 	<script src="js/jquery.slimscroll.min.js"></script>
- 
-
- 
-
+        
+<script>
+    $('.toggle').click(function(e) {
+    e.preventDefault();
+  
+    var $this = $(this);
+  
+    if ($this.next().hasClass('show')) {
+        $this.next().removeClass('show');
+        $this.next().slideUp(350);        
+    } else {
+        $this.parent().parent().find('li .inner').removeClass('show');
+        $this.parent().parent().find('li .inner').slideUp(350);
+        $this.next().toggleClass('show');
+    }
+});
+</script>
   </body>
 </html>

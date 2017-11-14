@@ -4,18 +4,22 @@ Dashboard-q is a homelab dashboard with qBittorrent/Transmission, PRTG and forec
 
 ## Installation
 
-Extract to your webserver and create a "bookmarks.dat" file in the root direcotry.
+Extract to your webserver and access the index page. You will be redirected to the setup and the bookmarks page.
 Then, in your browser, navigate to the root of the directory (ex: http://localhost/dahboard-q) and you will be prompted with the settings page for your initial setup.
 
 The time display is based on your php settings. Set the timezone in your php.ini file.
 
 Secure your webserver to deny-all on the config.ini, otherwise, anyone can view your api-key, torrent_username, and torrent_password simply by appending /config.ini to the end of the url.
 
-Make sure your config.ini is writeable by your webserver otherwise the settings page won't work.
+Make sure your config.ini and the bookmarks.dat files are writeable by your webserver otherwise the settings page won't work.
 
 ## Bookmarks
 
-Bookmarks must be set in the "bookmarks.dat" file. Here's an example:
+Bookmarks can be set in the "bookmarks.dat" file or from the UI. Here's an example of the content:
+
+	[Media]
+	icon=icon_plus
+	isCategory=true
 
     [qBittorrent]
 	url=https://192.168.0.0:8080
@@ -27,11 +31,15 @@ Bookmarks must be set in the "bookmarks.dat" file. Here's an example:
 	icon=arrow_triangle-right_alt2
 	iframe=false
 	
+![Not found](/screenshots/bookmarks.png?raw=true "Bookmarks")
+	
+	
 **Leave a blank line between each definition.**
 	
  * url: The url you wish to reach
  * icon: The icon of the bookmark, available icons are displayed here: https://www.elegantthemes.com/blog/resources/elegant-icon-font, Look under "Complete List Of Class Names".
- * iframe: Can be true or false. "True" will open the page in the current window while "false" will open it in a new tab. You may encounter problem with "true" as some softwares won't allow loading in an iframe. Sometimes, you just need to visit the page once to accept the self-signed certificate.
+ * iframe: Can be true or false. "true" will open the page in the current window while "false" will open it in a new tab. You may encounter problem with "true" as some softwares won't allow loading in an iframe. Sometimes, you just need to visit the page once to accept the self-signed certificate.
+ * isCategory: Set to "true" to make this section behave like a category header, anything below it will fall under this category until it finds another one.
 
 	
 dashboard-q is built using:
@@ -43,7 +51,14 @@ dashboard-q is built using:
 ## Screenshot
 
 ![Not found](/screenshots/home.png?raw=true "Home")
+![Not found](/screenshots/categories.png?raw=true "Categories")
 
+## Future plans
+
+- Zabbix integration
+
+## DISCLAIMER
+This is in no mean built to be accessible from the internet. Expose at your own risks.
  
 ## License
 Distributed under the MIT License.

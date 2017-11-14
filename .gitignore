@@ -3,3 +3,6 @@
 /bookmarks.dat
 /.htaccess
 .DS_Store
+todo.txt
+.vs/
+*.bak

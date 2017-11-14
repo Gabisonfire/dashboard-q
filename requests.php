@@ -5,18 +5,14 @@
     $initialSetup = false;
 
     // Check for needed file
-    if(!file_exists("bookmarks.dat")){
-        Exit(1);
-    }
-
-	$cfg = checkConfig();
+    $cfg = checkConfig();
     function checkConfig()
     {
         if(!file_exists("config.ini"))
         {
-            echo "<span class=\"error-center\">Failed to load config.ini</span>";
-            header("Location: settings.php");
-            Exit(1);
+            return;
+            echo "<span class=\"info-center\">Config not found, redirecting to setup.</span>";
+            echo "<script> window.location.href=\"settings.php\";</script>";
         }
 
         try{

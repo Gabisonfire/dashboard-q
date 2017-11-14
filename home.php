@@ -13,16 +13,34 @@
         <link href="css/elegant-icons-style.css" rel="stylesheet" />
         <link href="css/font-awesome.min.css" rel="stylesheet" />
         <!-- Custom styles -->
-        <link href="css/widgets.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
         <link href="css/style-responsive.css" rel="stylesheet" />
         <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+        <?php
+            if(!file_exists("config.ini"))
+            {
+                echo "<span class=\"info-center\">Config not found, redirecting to setup.</span>";
+                echo "<script> window.location.href=\"settings.php\";</script>";
+                //Exit(1);
+            }
+        
+            if(!file_exists("bookmarks.dat")){
+                echo "<span class=\"error-center\">Failed to load bookmarks.dat</span>";
+                echo "<script> window.location.href='bookmarks.php' </script>";
+            }  
+        
+        
+        include 'requests.php';
+        //$cfg is loaded from requests.php
+        echo '<meta http-equiv="refresh" content="' . $cfg['refresh_seconds'] . '" >';
+        ?>
     </head>
     <body>
         <?php
+        
+ 
+        
             // Process requests
-            include 'requests.php';
-            //$cfg is loaded from requests.php
             $client = strtolower($cfg['torrent_client']);
             if( $client == "qbittorrent"){
                 $torrents = getRequest("/query/torrents?filter=all&sort=name");
@@ -37,8 +55,6 @@
             if( $cfg['show_weather'] == "true"){
                 $weather = weather();
             }
-            header('Refresh: ' . $cfg['refresh_seconds']);
-            
         ?>
     
         <!--main content start-->
@@ -81,7 +97,7 @@
                 <!--Downloading and Seeding Section-->
                 <?php
                     if (!$cfg['torrent_client'] == ""){
-                        include 'torrent.php';
+                        include 'torrents_info.php';
                     }
                 ?>
                 <!--prtg section-->
@@ -93,7 +109,7 @@
                 <!--Torrent List section-->
                 <?php
                     if (!$cfg['torrent_client'] == ""){
-                        include 'torrents.php';
+                        include 'torrents_listing.php';
                     }
                 ?>
                 <!--Error display-->
