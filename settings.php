@@ -65,7 +65,7 @@
                 <td><input type="password" name="torrent_password" value="<?php echo $cfg["torrent_password"];?>"></td>
             </tr>
             <tr>
-                <td>Torrent host ip or URL</td>
+                <td>Torrent host ip/hostname</td>
                 <td><input type="text" name="torrent_host" value="<?php echo $cfg["torrent_host"];?>"></td>
             </tr>
             <tr>
