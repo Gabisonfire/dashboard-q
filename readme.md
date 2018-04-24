@@ -13,7 +13,7 @@ Secure your webserver to deny-all on the config.ini, otherwise, anyone can view 
 
 Make sure your config.ini and the bookmarks.dat files are writeable by your webserver otherwise the settings page won't work.
 
-###forecast.io API
+### forecast.io API
 
 Make sure to register to https://darksky.net for a free account, to use the forecast APIs.
 
